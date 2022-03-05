@@ -22,6 +22,8 @@ class App:
             global character
             character = character + str(input_num)
             number.set(character)
+            position = entry.index(INSERT)
+            entry.icursor(position + 1)
 
         #druha kolonka pro vypisovani vysledku, nelze do ni zapisovat
         result = Text(window, width = 25, height = 1, font = ('none 19'), bg = "white")

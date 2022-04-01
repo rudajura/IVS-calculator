@@ -1,0 +1,11 @@
+Přidělení úkolů členům týmu:
+
+Jurišica Rudolf xjuris02 - tvorba kalkulačky (naprogramování)
+Csáder Lukáš    xcsade00 - tvorba testů
+Kaska Karel	xkaska02 - příručka
+Šteberla Matúš	xstebe03 - makefile, odinstalátor, profiling
+
+Stanovené termíny nemáme jednotlivě dané, ale do 17.4.2022 bude potřeba od každého vidět udělaná práce, ideálně vše, aby byl čas na případné opravy či doladění programu.
+
+Pro komunikaci využíváme Discord, pravidlo je kontrola kanálu alespoň jednou denně, zda nepřibylo něco nového.
+Pro správu verzí a hosting používáme GitHub https://github.com/rudajura/IVS-calculator , pro nahlédnutí je potřeba přijmout pozvánku, která byla odeslána na email ivs.kontrola@gmail.com.

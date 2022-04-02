@@ -125,12 +125,31 @@ def show_help():
     global if_help
     if if_help == 0:
         window.resizable(width=False, height=False)
-        window.geometry("700x340")
+        window.geometry("883x446")
         if_help = 1
     else:
         window.resizable(width=False, height=False)
-        window.geometry("400x340")
+        window.geometry("360x340")
         if_help = 0
+
+help_msg ='''
+                Nápověda:
+
+-příklady vytvářejte primárně pomocí tlačítek
+ zobrazenými v kalkulačce
+-alternativně lze místo tlačítka "=" použít
+ klávesu ENTER
+-v případě nesprávného zadání kalkulačka 
+ vypíše zprávu "chyba v zadání"
+-faktoriál: zadejte číslo, kterého chcete 
+ vypočítat faktoriál, a stiskněte "!" - ihned
+ se zobrazí výsledek
+-mocnina: nejdříve zadejte základ mocniny
+(mocněnec), dále tlačítko "^", a nakonec exponent
+-odmocnina: nejdříve zadejte odmocněnce (číslo 
+ pod odmocninou), tlačítko \u221A a nakonec zadejte
+ odmocnitele
+ '''
 
 
 
@@ -144,7 +163,7 @@ if __name__ == "__main__":
 
     #nastaveni parametru, se kterymi se bude kalkulacka (okno) vykreslovat
     window.title("Calculator")
-    window.geometry("400x340")
+    window.geometry("360x340")
     window.resizable(0, 0)
     window.configure(background = "lightgrey")
 
@@ -153,34 +172,40 @@ if __name__ == "__main__":
 
     #prvni kolonka pro vkladani cisel a zobrazeni vysledku
     entry = Entry(window, width = 13, font = ('none 24'), bg = "white", textvar = number, insertontime = 0)
-    entry.pack(side = TOP, anchor = NW)
+    entry.place(x = 10, y = 0)
     entry.focus_set()
 
+    help_display = Label(window, text = help_msg,
+                   font=('none',12),
+                   bg='grey',fg='black', justify = LEFT)
+ 
+    help_display.place(x = 360, y = 5)
+
     #jednotliva tlacitka
-    but_9 = Button(window, text = "9", fg = "white", bg = "grey", width = 2, height = 2, command = lambda:load_input(9)) .place(x = 90, y = 82)
-    but_8 = Button(window, text = "8", fg = "white", bg = "grey", width = 2, height = 2, command = lambda:load_input(8)) .place(x = 45, y = 82)
-    but_7 = Button(window, text = "7", fg = "white", bg = "grey", width = 2, height = 2, command = lambda:load_input(7)) .place(x = 0, y = 82)
-    but_6 = Button(window, text = "6", fg = "white", bg = "grey", width = 2, height = 2, command = lambda:load_input(6)) .place(x = 90, y = 131)
-    but_5 = Button(window, text = "5", fg = "white", bg = "grey", width = 2, height = 2, command = lambda:load_input(5)) .place(x = 45, y = 131)
-    but_4 = Button(window, text = "4", fg = "white", bg = "grey", width = 2, height = 2, command = lambda:load_input(4)) .place(x = 0, y = 131)
-    but_3 = Button(window, text = "3", fg = "white", bg = "grey", width = 2, height = 2, command = lambda:load_input(3)) .place(x = 90, y = 180)
-    but_2 = Button(window, text = "2", fg = "white", bg = "grey", width = 2, height = 2, command = lambda:load_input(2)) .place(x = 45, y = 180)
-    but_1 = Button(window, text = "1", fg = "white", bg = "grey", width = 2, height = 2, command = lambda:load_input(1)) .place(x = 0, y = 180)
-    but_0 = Button(window, text = "0", fg = "white", bg = "grey", width = 2, height = 2, command = lambda:load_input(0)) .place(x = 0, y = 231)
-    but_dot = Button(window, text = ".", fg = "black", width = 2, height = 2, command = lambda:load_input('.')) .place(x = 49, y = 231)
-    but_fact = Button(window, text = "!", fg = "black", width = 2, height = 2, command = factorial) .place(x = 94, y = 231)
-    but_div = Button(window, text = "/", fg = "black", width = 2, height = 2, command = lambda:load_input('/')) .place(x = 135, y = 82)
-    but_mul = Button(window, text = "*", fg = "black", width = 2, height = 2, command = lambda:load_input('*')) .place(x = 135, y = 131)
-    but_minus = Button(window, text = "-", fg = "black", width = 2, height = 2, command = lambda:load_input('-')) .place(x = 135, y = 180)
-    but_plus = Button(window, text = "+", fg = "black", width = 2, height = 2, command = lambda:load_input('+')) .place(x = 135, y = 231)
-    but_clear = Button(window, text = "C", fg = "black", width = 2, height = 2, command = clear) .place(x = 180, y = 82)
-    but_backsp = Button(window, text = "<-", fg = "black", width = 2, height = 2, command = backspace) .place(x = 225, y = 82)
-    but_lbrack = Button(window, text = "(", fg = "black", width = 2, height = 2, command = lambda:load_input('(')) .place(x = 180, y = 131)
-    but_rbrack = Button(window, text = ")", fg = "black", width = 2, height = 2, command = lambda:load_input(')')) .place(x = 225, y = 131)
-    but_sqr = Button(window, text = "^", fg = "black", width = 2, height = 2, command = lambda:load_input('**')) .place(x = 180, y = 180)
-    but_sqrt = Button(window, text = "\u221A", fg = "black", width = 2, height = 2, command = square_root) .place(x = 225, y = 180)
-    but_help = Button(window, text = "help", fg = "black", width = 2, height = 2, command = show_help) .place(x = 180, y = 231)
-    but_res = Button(window, text = "=", fg = "white", bg = "green", width = 2, height = 2, command = result_foo) .place(x = 225, y = 231)
+    but_9 = Button(window, text = "9", fg = "white", bg = "grey", width = 2, height = 2, command = lambda:load_input(9)) .place(x = 30 + 90, y = 82)
+    but_8 = Button(window, text = "8", fg = "white", bg = "grey", width = 2, height = 2, command = lambda:load_input(8)) .place(x = 30 + 45, y = 82)
+    but_7 = Button(window, text = "7", fg = "white", bg = "grey", width = 2, height = 2, command = lambda:load_input(7)) .place(x = 30 + 0, y = 82)
+    but_6 = Button(window, text = "6", fg = "white", bg = "grey", width = 2, height = 2, command = lambda:load_input(6)) .place(x = 30 + 90, y = 131)
+    but_5 = Button(window, text = "5", fg = "white", bg = "grey", width = 2, height = 2, command = lambda:load_input(5)) .place(x = 30 + 45, y = 131)
+    but_4 = Button(window, text = "4", fg = "white", bg = "grey", width = 2, height = 2, command = lambda:load_input(4)) .place(x = 30 + 0, y = 131)
+    but_3 = Button(window, text = "3", fg = "white", bg = "grey", width = 2, height = 2, command = lambda:load_input(3)) .place(x = 30 + 90, y = 180)
+    but_2 = Button(window, text = "2", fg = "white", bg = "grey", width = 2, height = 2, command = lambda:load_input(2)) .place(x = 30 + 45, y = 180)
+    but_1 = Button(window, text = "1", fg = "white", bg = "grey", width = 2, height = 2, command = lambda:load_input(1)) .place(x = 30 + 0, y = 180)
+    but_0 = Button(window, text = "0", fg = "white", bg = "grey", width = 2, height = 2, command = lambda:load_input(0)) .place(x = 30 + 0, y = 231)
+    but_dot = Button(window, text = ".", fg = "black", width = 2, height = 2, command = lambda:load_input('.')) .place(x = 30 + 49, y = 231)
+    but_fact = Button(window, text = "!", fg = "black", width = 2, height = 2, command = factorial) .place(x = 30 + 94, y = 231)
+    but_div = Button(window, text = "/", fg = "black", width = 2, height = 2, command = lambda:load_input('/')) .place(x = 30 + 138, y = 82)
+    but_mul = Button(window, text = "*", fg = "black", width = 2, height = 2, command = lambda:load_input('*')) .place(x = 30 + 138, y = 131)
+    but_minus = Button(window, text = "-", fg = "black", width = 2, height = 2, command = lambda:load_input('-')) .place(x = 30 + 138, y = 180)
+    but_plus = Button(window, text = "+", fg = "black", width = 2, height = 2, command = lambda:load_input('+')) .place(x = 30 + 138, y = 231)
+    but_clear = Button(window, text = "C", fg = "black", width = 2, height = 2, command = clear) .place(x = 30 + 180, y = 82)
+    but_backsp = Button(window, text = "<-", fg = "black", width = 2, height = 2, command = backspace) .place(x = 30 + 225, y = 82)
+    but_lbrack = Button(window, text = "(", fg = "black", width = 2, height = 2, command = lambda:load_input('(')) .place(x = 30 + 180, y = 131)
+    but_rbrack = Button(window, text = ")", fg = "black", width = 2, height = 2, command = lambda:load_input(')')) .place(x = 30 + 225, y = 131)
+    but_sqr = Button(window, text = "^", fg = "black", width = 2, height = 2, command = lambda:load_input('**')) .place(x = 30 + 180, y = 180)
+    but_sqrt = Button(window, text = "\u221A", fg = "black", width = 2, height = 2, command = square_root) .place(x = 30 + 225, y = 180)
+    but_help = Button(window, text = "help", fg = "black", width = 2, height = 2, command = show_help) .place(x = 30 + 180, y = 231)
+    but_res = Button(window, text = "=", fg = "white", bg = "green", width = 2, height = 2, command = result_foo) .place(x = 30 + 225, y = 231)
 
     #lze pouzit enter pro zobrazeni vysledku, ale jen pokud byl priklad zadan mysi
     #v tkinteru se enter znaci jako "Return"

@@ -2,7 +2,6 @@ from tkinter import *       #naimportuje vsechno z knihovny tkinter
 
 #TODO:
 #nacitani vstupu z klavesnice
-#napoveda
 
 #prazdny retezec, budou se do nej dosazovat cislice a s nimi pak pocitat
 character = ""

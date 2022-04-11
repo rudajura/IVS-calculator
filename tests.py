@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+
 # Project 2: IVS-calculator - Tests                      
 # Author: Lukas Csader 
 # Mail: xcsade00@stud.fit.vutbr.cz 
@@ -32,7 +32,7 @@ class Test:
             print('Given result: ',''.join(str(input)))
         else:
             self.pass_count += 1
-            print('[PASSED]', test_name)
+            print(self.test_count, '/43 [PASSED]', test_name)
 
     #Function to print stats
     #prints numbers of - passed tests / all tests (percentage of passed tests)

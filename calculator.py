@@ -1,5 +1,8 @@
 from tkinter import *       #naimportuje vsechno z knihovny tkinter
 
+#TODO:
+#nacitani vstupu z klavesnice
+
 #prazdny retezec, budou se do nej dosazovat cislice a s nimi pak pocitat
 character = ""
 
@@ -21,7 +24,7 @@ def load_input(input_num):
         length = len(character) - 1
         character = character[:length] + str(input_num) + character[length:]
         number.set(character)
-    else:
+    else:   
         character = character + str(input_num)
         number.set(character)
         position = entry.index(INSERT)
@@ -31,70 +34,51 @@ def load_input(input_num):
 #zobrazi vysledek prikladu, a nasledne zresetuje pole pro vkladani cisel
 #vetev "try" se vykona, pokud v priklade neni zadna chyba (napriklad dvakrat minus, deleni nulou atd.)
 #pokud je tam chyba, provede se vetev "except" a vypise se chybova hlaska
-def result_foo():
+def res(character):
+    try:
+        return str(eval(character))
+    except:
+        return "ERROR"
+    
+def sqrt_total(sqrt_var):
+    sqrt_var = sqrt_var + ")"
+    return str(eval(sqrt_var))
+
+def catch_exeption(total):
     global character
-    global sqrt_var
     global if_sqrt
-    if character == "":
-        try:
-            if if_sqrt == 1:
-                number.set(eval(number.get() + str(")")))
-                if_sqrt = 0
-            else:
-                number.set(eval(number.get()))
-        except:
-            number.set("chyba v zadání")
-            character = ""
-            if_sqrt = 0
+    if total == "ERROR":
+        number.set("chyba v zadání")
+        character = ""
+        if_sqrt = 0
+    else: 
+        number.set(total)
+        character = ""
+        if_sqrt = 0
+
+def result_foo():
+
+    global sqrt_var
+    global character
+    global if_sqrt
+    if if_sqrt == 1:
+        total = sqrt_total(sqrt_var)
+        catch_exeption(total)
     else:
-        try:
-            if if_sqrt == 1:
-                sqrt_var = sqrt_var + ")"
-                total = str(eval(sqrt_var))
-                number.set(total)
-                character = total
-                if_sqrt = 0
-            else:
-                total = str(eval(character))
-                number.set(total)
-                character = total
-        except:
-            number.set("chyba v zadání")
-            character = ""
-            if_sqrt = 0
+        total = res(character)
+        catch_exeption(total)
 
 #stejna funkce jako result_foo, akorat se vola, kdyz je stisknuta klavesa enter
 def result_enter(entry):
-    global character
     global sqrt_var
+    global character
     global if_sqrt
-    if character == "":
-        try:
-            if if_sqrt == 1:
-                number.set(eval(number.get() + str(")")))
-                if_sqrt = 0
-            else:
-                number.set(eval(number.get()))
-        except:
-            number.set("chyba v zadání")
-            character = ""
-            if_sqrt = 0
+    if if_sqrt == 1:
+        total = sqrt_total(sqrt_var)
+        catch_exeption(total)
     else:
-        try:
-            if if_sqrt == 1:
-                sqrt_var = sqrt_var + ")"
-                total = str(eval(sqrt_var))
-                number.set(total)
-                character = total
-                if_sqrt = 0
-            else:
-                total = str(eval(character))
-                number.set(total)
-                character = total
-        except:
-            number.set("chyba v zadání")
-            character = ""
-            if_sqrt = 0
+        total = res(character)
+        catch_exeption(total)
 
 #odstrani posledni znak z prikladu (cisla)
 def backspace():
@@ -111,23 +95,30 @@ def clear():
     number.set(character)
 
 #funkce na faktorial - pri stisknuti tlacitka "!" se okamzite spocita faktorial a vypise na obrazovku
-def factorial():
+def factorial(total):
+    if total < 0:
+        return "ERROR"
+    elif total == 0:
+        return 1
+    else :
+        fact = 1
+        for i in range(1, total + 1):
+            fact = fact * i
+    return fact
+
+def factorial_set():
     global character
-    tmp_var = number.get()
-    if tmp_var.isdigit(): 
-        total = int(tmp_var)
-        if total < 0:
+    if character.isdigit(): 
+        total = factorial(int(character))
+        if total == "ERROR":
             number.set("chyba v zadání")
             character = ""
-        elif total == 0:
+        elif total == 1:
             number.set(1)
-            character = str(1)
+            character = ""
         else :
-            fact = 1
-            for i in range(1, total + 1):
-                fact = fact * i
-            number.set(fact)
-            character = str(fact)
+            number.set(total)
+            character = ""
     else:
         number.set("chyba v zadání")
         character = ""
@@ -137,40 +128,27 @@ def square_root():
     global character
     global sqrt_var
     global if_sqrt
-    #pokud je promenna character prazdna, znamena to, ze se zadava vstup z klavesnice
-    if character == "":
-        if_sqrt = 1
-        number.set(number.get() + str("**(1/"))
-        position = entry.index(INSERT)
-        entry.icursor(position + 5)
-    else:
-        if_sqrt = 1
-        number.set(character+str("\u221A()"))
-        sqrt_var = character + str("**(1/")
-        character = character + str("\u221A()")
+    if_sqrt = 1
+    number.set(character+str("\u221A()"))
+    sqrt_var = character + str("**(1/")
+    character = character + str("\u221A()")
 
-#funkce na zobrazeni okna s napovedou
 def show_help():
     global if_help
     if if_help == 0:
         window.resizable(width=False, height=False)
-        window.geometry("894x588")
+        window.geometry("883x446")
         if_help = 1
     else:
         window.resizable(width=False, height=False)
         window.geometry("360x340")
         if_help = 0
 
-help_msg ='''              Nápověda: 
+help_msg ='''
+                Nápověda:
 
--příklady pište pouze klávesnicí nebo pouze 
- vyobrazenými tlačítky v rozhraní kalkulačky
- (kromě funkcí faktorial, odmocnina a rovná se
- (neboli výsledek) nikdy klávesnici a tlačítka
- nekombinujte)
--pokud zadáváte příklad pomocí klávesnice
- a zobrazí se vám chybová hláška "chyba v zadání",
- zmáčkněte tlačítko "C" a můžete zadat nový příklad
+-příklady vytvářejte primárně pomocí tlačítek
+ zobrazenými v kalkulačce
 -alternativně lze místo tlačítka "=" použít
  klávesu ENTER
 -v případě nesprávného zadání kalkulačka 
@@ -180,11 +158,11 @@ help_msg ='''              Nápověda:
  se zobrazí výsledek
 -mocnina: nejdříve zadejte základ mocniny
 (mocněnec), dále tlačítko "^", a nakonec exponent
-(v případě zadávání z klávesnice mocninu pište 
- jako "**")
 -odmocnina: nejdříve zadejte odmocněnce (číslo 
  pod odmocninou), tlačítko \u221A a nakonec zadejte
- odmocnitele '''
+ odmocnitele
+ '''
+
 
 
 ##################             MAINLOOP             ######################
@@ -205,7 +183,7 @@ if __name__ == "__main__":
     number = StringVar()
 
     #prvni kolonka pro vkladani cisel a zobrazeni vysledku
-    entry = Entry(window, width = 13, font = ('none 24'), bg = "white", textvar = number, insertontime = 0, justify = "left")
+    entry = Entry(window, width = 13, font = ('none 24'), bg = "white", textvar = number, insertontime = 0)
     entry.place(x = 10, y = 0)
     entry.focus_set()
 
@@ -227,7 +205,7 @@ if __name__ == "__main__":
     but_1 = Button(window, text = "1", fg = "white", bg = "grey", width = 2, height = 2, command = lambda:load_input(1)) .place(x = 30 + 0, y = 180)
     but_0 = Button(window, text = "0", fg = "white", bg = "grey", width = 2, height = 2, command = lambda:load_input(0)) .place(x = 30 + 0, y = 231)
     but_dot = Button(window, text = ".", fg = "black", width = 2, height = 2, command = lambda:load_input('.')) .place(x = 30 + 49, y = 231)
-    but_fact = Button(window, text = "!", fg = "black", width = 2, height = 2, command = factorial) .place(x = 30 + 94, y = 231)
+    but_fact = Button(window, text = "!", fg = "black", width = 2, height = 2, command = factorial_set) .place(x = 30 + 94, y = 231)
     but_div = Button(window, text = "/", fg = "black", width = 2, height = 2, command = lambda:load_input('/')) .place(x = 30 + 138, y = 82)
     but_mul = Button(window, text = "*", fg = "black", width = 2, height = 2, command = lambda:load_input('*')) .place(x = 30 + 138, y = 131)
     but_minus = Button(window, text = "-", fg = "black", width = 2, height = 2, command = lambda:load_input('-')) .place(x = 30 + 138, y = 180)

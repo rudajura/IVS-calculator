@@ -1,7 +1,5 @@
 from tkinter import *       #naimportuje vsechno z knihovny tkinter
-
-#TODO:
-#nacitani vstupu z klavesnice
+import math
 
 #prazdny retezec, budou se do nej dosazovat cislice a s nimi pak pocitat
 character = ""
@@ -34,15 +32,19 @@ def load_input(input_num):
 #zobrazi vysledek prikladu, a nasledne zresetuje pole pro vkladani cisel
 #vetev "try" se vykona, pokud v priklade neni zadna chyba (napriklad dvakrat minus, deleni nulou atd.)
 #pokud je tam chyba, provede se vetev "except" a vypise se chybova hlaska
-def res(character):
+    
+def sqrt_total(num):
+    global character
+    global sqrt_var
     try:
-        return str(eval(character))
+        if num == 0:
+            sqrt_ret = eval(number.get() + str(")"))
+            return str(sqrt_ret)
+        else:
+            sqrt_var = sqrt_var + ")"
+            return str(eval(sqrt_var))
     except:
         return "ERROR"
-    
-def sqrt_total(sqrt_var):
-    sqrt_var = sqrt_var + ")"
-    return str(eval(sqrt_var))
 
 def catch_exeption(total):
     global character
@@ -56,17 +58,45 @@ def catch_exeption(total):
         character = ""
         if_sqrt = 0
 
-def result_foo():
+def res(character):
+    try:
+        if character == "":
+            character = eval(number.get())
+            if(character == -0.0):
+                character = character + 0.0
+            return str(character)
+        else:
+            character = eval(character)
+            if(character == -0.0):
+                character = character + 0.0
+            return str(character)
+    except:
+        return "ERROR"
 
+def result_foo():
     global sqrt_var
     global character
     global if_sqrt
     if if_sqrt == 1:
-        total = sqrt_total(sqrt_var)
-        catch_exeption(total)
+        if character == "":
+            total = sqrt_total(0)
+            catch_exeption(total)
+            if_sqrt = 0
+            character = total
+        else:
+            total = sqrt_total(1)
+            catch_exeption(total)
+            if_sqrt = 0
+            character = total
     else:
-        total = res(character)
-        catch_exeption(total)
+        if character == "":
+            total = res(character)
+            catch_exeption(total)
+            character = total
+        else:
+            total = res(character)
+            catch_exeption(total)
+            character = total
 
 #stejna funkce jako result_foo, akorat se vola, kdyz je stisknuta klavesa enter
 def result_enter(entry):
@@ -74,11 +104,25 @@ def result_enter(entry):
     global character
     global if_sqrt
     if if_sqrt == 1:
-        total = sqrt_total(sqrt_var)
-        catch_exeption(total)
+        if character == "":
+            total = sqrt_total(0)
+            catch_exeption(total)
+            if_sqrt = 0
+            character = total
+        else:
+            total = sqrt_total(1)
+            catch_exeption(total)
+            if_sqrt = 0
+            character = total
     else:
-        total = res(character)
-        catch_exeption(total)
+        if character == "":
+            total = res(character)
+            catch_exeption(total)
+            character = total
+        else:
+            total = res(1)
+            catch_exeption(character)
+            character = total
 
 #odstrani posledni znak z prikladu (cisla)
 def backspace():
@@ -106,10 +150,12 @@ def factorial(total):
             fact = fact * i
     return fact
 
+#funkce na vypocet faktorialu, pro jeho vypocet se zavola funkce factorial(total)
 def factorial_set():
     global character
-    if character.isdigit(): 
-        total = factorial(int(character))
+    tmp_var = number.get()
+    if tmp_var.isdigit(): 
+        total = factorial(int(tmp_var))
         if total == "ERROR":
             number.set("chyba v zadání")
             character = ""
@@ -128,27 +174,40 @@ def square_root():
     global character
     global sqrt_var
     global if_sqrt
-    if_sqrt = 1
-    number.set(character+str("\u221A()"))
-    sqrt_var = character + str("**(1/")
-    character = character + str("\u221A()")
+    #pokud je promenna character prazdna, znamena to, ze se zadava vstup z klavesnice
+    if character == "":
+        if_sqrt = 1
+        number.set(number.get() + str("**(1/"))
+        position = entry.index(INSERT)
+        entry.icursor(position + 5)
+    else:
+        if_sqrt = 1
+        number.set(character+str("\u221A()"))
+        sqrt_var = character + str("**(1/")
+        character = character + str("\u221A()")
 
+#funkce na zobrazeni okna s napovedou
 def show_help():
     global if_help
     if if_help == 0:
         window.resizable(width=False, height=False)
-        window.geometry("883x446")
+        window.geometry("894x588")
         if_help = 1
     else:
         window.resizable(width=False, height=False)
         window.geometry("360x340")
         if_help = 0
 
-help_msg ='''
-                Nápověda:
+help_msg ='''              Nápověda: 
 
--příklady vytvářejte primárně pomocí tlačítek
- zobrazenými v kalkulačce
+-příklady pište pouze klávesnicí nebo pouze 
+ vyobrazenými tlačítky v rozhraní kalkulačky
+ (kromě funkcí faktorial, odmocnina a rovná se
+ (neboli výsledek) nikdy klávesnici a tlačítka
+ nekombinujte)
+-pokud zadáváte příklad pomocí klávesnice
+ a zobrazí se vám chybová hláška "chyba v zadání",
+ zmáčkněte tlačítko "C" a můžete zadat nový příklad
 -alternativně lze místo tlačítka "=" použít
  klávesu ENTER
 -v případě nesprávného zadání kalkulačka 
@@ -158,10 +217,11 @@ help_msg ='''
  se zobrazí výsledek
 -mocnina: nejdříve zadejte základ mocniny
 (mocněnec), dále tlačítko "^", a nakonec exponent
+(v případě zadávání z klávesnice mocninu pište 
+ jako "**")
 -odmocnina: nejdříve zadejte odmocněnce (číslo 
  pod odmocninou), tlačítko \u221A a nakonec zadejte
- odmocnitele
- '''
+ odmocnitele '''
 
 
 
@@ -183,7 +243,7 @@ if __name__ == "__main__":
     number = StringVar()
 
     #prvni kolonka pro vkladani cisel a zobrazeni vysledku
-    entry = Entry(window, width = 13, font = ('none 24'), bg = "white", textvar = number, insertontime = 0)
+    entry = Entry(window, width = 13, font = ('none 24'), bg = "white", textvar = number, insertontime = 0, justify = "left")
     entry.place(x = 10, y = 0)
     entry.focus_set()
 

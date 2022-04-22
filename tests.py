@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 # Project 2: IVS-calculator - Tests                      
-# Author: Lukas Csader 
+#    Author: Lukas Csader 
 # Mail: xcsade00@stud.fit.vutbr.cz 
 # Date: 7.10.2021
 

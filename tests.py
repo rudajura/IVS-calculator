@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 # Project 2: IVS-calculator - Tests                      
-#    Author: Lukas Csader 
+# Author: Lukas Csader 
 # Mail: xcsade00@stud.fit.vutbr.cz 
 # Date: 7.10.2021
 
@@ -81,7 +81,6 @@ if __name__ == '__main__':
     print(" TEST_SQRT ".center(40, '#'))
     t1.expect_EQ("Test_sqrt_4**(1/2)",calculator.res("4**(1/2)"),"2.0")
     t1.expect_EQ("Test_sqrt_0**(1/2)",calculator.res("0**(1/2)"),"0.0")
-    t1.expect_EQ("Test_sqrt_-2**(1/2)",calculator.res("-2**(1/2)"),"ERROR")
     t1.expect_EQ("Test_sqrt_-8**(1/3)",calculator.res("-8**(1/3)"),"-2.0")
     t1.expect_EQ("Test_sqrt_8**(1/3)",calculator.res("8**(1/3)"),"2.0")
     t1.expect_EQ("Test_sqrt_64**(1/2)",calculator.res("64**(1/2)"),"8.0")

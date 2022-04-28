@@ -1,0 +1,11 @@
+Source: calculator
+Section: Games
+Priority: extra
+Maintainer: Matus Steberla 
+Build-Depends: debhelper (>= 10), python-pyside
+Standards-Version: 4.1.2
+
+Package: calculator
+Architecture: any
+Depends: ${misc:Depends}, python-pyside
+Description: calculator

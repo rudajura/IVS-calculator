@@ -1,0 +1,25 @@
+Format: 1.8
+Date: Thu, 28 Apr 2022 04:56:41 +0200
+Source: calculator
+Binary: calculator
+Architecture: amd64
+Version: 1.0
+Distribution: unstable
+Urgency: medium
+Maintainer: unknown <xstebe03@stud.fit.vutbr.cz>
+Changed-By: unknown <xstebe03@stud.fit.vutbr.cz>
+Description:
+ calculator - <insert up to 60 chars description>
+Changes:
+ calculator (1.0) unstable; urgency=medium
+ .
+   * Initial Release.
+Checksums-Sha1:
+ 5b7f0d3cc7a4c397f35e4b618283a166049a38b4 5180 calculator_1.0_amd64.buildinfo
+ 0377270d097d17ff00b6a50082bdf0c581a0e539 2184 calculator_1.0_amd64.deb
+Checksums-Sha256:
+ 35950994ac02a3fe6834dd200a9e3bea4ff7559cbd1606958562fd2d82197a4f 5180 calculator_1.0_amd64.buildinfo
+ 170a5410e6cc522cd3cf9b74c9e723cdb7b021fc168db4ffcf189084737b93fb 2184 calculator_1.0_amd64.deb
+Files:
+ 85a5806176dd39e5b918e59ad668e351 5180 unknown optional calculator_1.0_amd64.buildinfo
+ fe489a7b9b20225d2a4424441f58054e 2184 unknown optional calculator_1.0_amd64.deb

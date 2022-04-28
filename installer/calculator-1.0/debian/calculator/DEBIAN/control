@@ -1,0 +1,10 @@
+Package: calculator
+Version: 1.0
+Architecture: amd64
+Maintainer: unknown <xstebe03@stud.fit.vutbr.cz>
+Installed-Size: 10
+Section: unknown
+Priority: optional
+Homepage: <insert the upstream URL, if relevant>
+Description: <insert up to 60 chars description>
+ <insert long description, indented with spaces>

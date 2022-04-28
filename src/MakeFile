@@ -1,0 +1,35 @@
+.PHONY: all pip pack pack clean test doc run installer
+
+all: pip run
+
+pip:
+	
+
+init:
+	pip3 install -r requirements.txt
+
+pack: doc packfolder calculator/xkaska02_xcsade00_xstebe03_xlogin00.zip
+
+calculator/xkaska02_xcsade00_xstebe03_xjuris02.zip:
+	rm -rf ../../xkaska02_xcsade00_xstebe03_xjuris02/repo/installer
+	rm -rf ../../xkaska02_xcsade00_xstebe03_xjuris02/repo/doc
+	cd ../.. && zip -r xkaska02_xcsade00_xstebe03_xjuris02
+
+packfolder:
+	mkdir -p ../../xkaska02_xcsade00_xstebe03_xjuris02/repo
+	mkdir ../../xkaska02_xcsade00_xstebe03_xjuris02/installer
+	mkdir ../../xkaska02_xcsade00_xstebe03_xjuris02/doc
+	cp -a ../../calculator/. ../../xkaska02_xcsade00_xstebe03_xjuris02/repo/
+	cp -a ../doc/. ../../xkaska02_xcsade00_xstebe03_xjuris02/doc/
+	cp - ../installer/. ../../xkaska02_xcsade00_xstebe03_xjuris02/installer/
+
+clean:
+	rm -rf ../installer/usr ../installer/DEBIAN/ ../../xkaska02_xcsade00_xstebe03_xjuris02
+
+test: tests.py
+	cd .. && python3 -m tests.py
+
+run: main.py
+	python3 main.py
+
+install:

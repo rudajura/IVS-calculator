@@ -19,7 +19,7 @@ test.pyc: tests.py
 compile:
 	python3 -m py_compile calculator.py
 
-pack: doc packfolder calculator/xkaska02_xcsade00_xstebe03_xlogin00.zip
+pack: doc packfolder calculator/xkaska02_xcsade00_xstebe03_xjuris02.zip
 
 calculator/xkaska02_xcsade00_xstebe03_xjuris02.zip:
 	rm -rf ../../xkaska02_xcsade00_xstebe03_xjuris02/repo/installer

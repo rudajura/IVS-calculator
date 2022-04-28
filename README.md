@@ -2,7 +2,7 @@ Calculator
 
 Platform: GNU/Linux
 
-Authors: 
+Authors:  
 -xjuris02 Rudolf Jurišica  
 -xcsade00 Lukáš Csáder  
 -xkaska02 Karel Kaska  

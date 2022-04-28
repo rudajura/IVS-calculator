@@ -2,7 +2,7 @@
 Categories=Calculator;
 Exec=calculator
 GenericName=calculator
-Icon=/usr/share/pixmaps/calculator.png
+Icon=/usr/share/pixmaps/calculator.xpm
 Name=Calculator
 Type=Application
 X-KDE-StartupNotify=false

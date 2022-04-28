@@ -1,4 +1,4 @@
-install/calculator.xpm /usr/share/pixmaps
+install/calculator.png /usr/share/pixmaps
 install/calculator.desktop /usr/share/applications
 install/calculator /usr/bin
 calculator.py /usr/bin

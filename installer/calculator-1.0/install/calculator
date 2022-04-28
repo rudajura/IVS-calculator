@@ -1,5 +1,5 @@
 #!/bin/bash
 # -*- coding: utf-8 -*-
 
-KUFR_HOME=`dirname "$0"`
+CALCULATOR_HOME=`dirname "$0"`
 exec python "${CALCULATOR_HOME}/calculator.py"

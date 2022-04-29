@@ -1,0 +1,4 @@
+xjuris02 105 kalkulačka (celá), README, .editorconfig, vedoucí
+xcsade00 100 tvorba testů
+xkaska02 100 příručka
+xstebe03 95  makefile, instalátor, odinstalátor
